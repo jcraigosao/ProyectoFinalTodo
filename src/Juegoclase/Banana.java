@@ -5,8 +5,6 @@
  */
 package Juegoclase;
 
-import java.awt.Rectangle;
-
 public class Banana {
 
 private int x; 
