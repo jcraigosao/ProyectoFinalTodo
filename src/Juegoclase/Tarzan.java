@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Juegoclase;
 
 /**
@@ -15,6 +11,7 @@ public class Tarzan {
     private int ancho;
     private int largo;
     private int contadorBananas;
+    private int vidas;
 
     public Tarzan(int x, int y) {
         this.y = y;
@@ -61,6 +58,14 @@ public class Tarzan {
 
     public void setContadorBananas(int contadorBananas) {
         this.contadorBananas = contadorBananas;
+    }
+
+    public int getVidas() {
+        return vidas;
+    }
+
+    public void setVidas(int vidas) {
+        this.vidas = vidas;
     }
     
     
