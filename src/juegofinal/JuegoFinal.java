@@ -15,7 +15,8 @@ public class JuegoFinal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+    BaseNivel b=new BaseNivel();
+// TODO code application logic here
     }
     
 }

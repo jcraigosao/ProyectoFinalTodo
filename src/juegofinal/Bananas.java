@@ -18,7 +18,6 @@ private int contadorBananas;
         Rectangle banana= new Rectangle(x, y, 60, 80);
         Rectangle tarzan= new Rectangle(t.getX(),t.getY(),100,150);
         if(banana.intersects(tarzan)){
-            contadorBananas+=1;
             return true;
         }else{
         return false;
@@ -49,10 +48,6 @@ private int contadorBananas;
         this.contadorBananas = contadorBananas;
     }
 
-    @Override
-    public String toString() {
-        return "PUNTAJE=" + contadorBananas ;
-    }
     
     
     
