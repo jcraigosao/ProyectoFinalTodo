@@ -3,11 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package JuegoPrueba;
+package Niveles;
 
-import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 
 /**
  *
  * @author TOSHIBA
  */
+public class TestPaintComponent3 extends JFrame{
+
+    public TestPaintComponent3() {
+        add(new Nivel3());
+    }
+
+    }

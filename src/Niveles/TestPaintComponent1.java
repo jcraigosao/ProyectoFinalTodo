@@ -1,5 +1,6 @@
-package Juegoclase;
+package Niveles;
 
+import Niveles.Nivel1;
 import java.awt.Color;
 import javax.swing.*;
 import java.awt.Graphics;
@@ -15,10 +16,10 @@ import java.awt.event.MouseListener;
 import javafx.scene.shape.Circle;
 import javax.swing.JPanel;
 
-public class TestPaintComponent extends JFrame{
+public class TestPaintComponent1 extends JFrame{
 
-    public TestPaintComponent() {
-        add(new JuegoFormas());
+    public TestPaintComponent1() {
+        add(new Nivel1());
     }
 
     }

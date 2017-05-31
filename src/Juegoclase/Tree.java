@@ -5,29 +5,19 @@
  */
 package Juegoclase;
 
-public class Banana extends Objetos{
+/**
+ *
+ * @author TOSHIBA
+ */
+public class Tree extends Objetos{
+    private int ancho;
+    private int largo;
 
-
-private int ancho;
-private int largo;
-
-    public Banana(int x, int y) {
+    public Tree(int x, int y) {
         super(x, y);
-        this.ancho = 40;
-        this.largo = 60;
+        this.ancho = 30;
+        this.largo = 50;
     }
-
-    
-    
-    public boolean CogerBananas(Tarzan t) {
-        if (getX()<=t.getX()+t.getAncho()&&getX()+getAncho()>=t.getX()
-                && getY()<=t.getLargo()+t.getY()&&getY()+getLargo()>=t.getY()) {            
-            return true;
-        }
-        return false;
-    
-    }
-    
 
     public int getAncho() {
         return ancho;
@@ -45,6 +35,4 @@ private int largo;
         this.largo = largo;
     }
     
-    
 }
-    

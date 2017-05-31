@@ -3,9 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Juegoclase;
+package Niveles;
 
+import Juegoclase.Banana;
+import Juegoclase.Enemigos;
+import Juegoclase.Tarzan;
+import Menu.PasarAlNivel2;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -20,7 +27,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -28,7 +37,7 @@ import javax.swing.Timer;
  *
  * @author i7hpinñi
  */
-public class JuegoFormas extends JPanel implements ActionListener, MouseListener {
+public class Nivel1 extends JPanel implements ActionListener, MouseListener {
 
     private int x;
     private int y = 400;
@@ -42,14 +51,17 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
     private boolean direccion = true;
     private ArrayList<Integer> aleatorio = new ArrayList<>();
     private Tarzan t = new Tarzan(z + 100, y);
-    private Snake s = new Snake(z + 50, y);
-    private ArrayList<Snake> snakes = new ArrayList<>();
+    private Enemigos s = new Enemigos(z + 50, y);
+    private ArrayList<Enemigos> snakes = new ArrayList<>();
     private ArrayList<Integer> snak = rectangulosBananas();
     private ArrayList<Banana> bananas = new ArrayList<>();
     private ArrayList<Integer> ban = rectangulosBananas();
     private boolean gameIsFinished = false;
+    private int toques=0;
+    
+        Image gameover= loadImage("YouLose_LI.jpg");
 
-    public JuegoFormas() {
+    public Nivel1() {
         this.addMouseListener(this);
         addKeyListener(new TAdapter());
         setFocusable(true);
@@ -57,6 +69,7 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
         timer.start();
         rectangulosBananas();
         agregar();
+        Boton();
     }
 //      
 //    public void coordenadasBananas(){
@@ -73,7 +86,7 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
 
     public ArrayList rectangulosBananas() {
         for (int i = 0; i < 70; i++) {
-            aleatorio.add((int) (Math.random() * 15000 + 200));
+            aleatorio.add((int) (Math.random() * 10000 + 200));
         }
         return aleatorio;
     }
@@ -82,26 +95,27 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
         for (int i = 0; i < 70; i++) {
             if (i < 40) {
                 bananas.add(new Banana(x + ban.get(i) * 2, 450));
-                snakes.add(new Snake(x + snak.get(i), 400));
+                snakes.add(new Enemigos(x + snak.get(i)*3, 450));
 
             } else if (i < 70) {
                 bananas.add(new Banana(x + ban.get(i) * 2, 300));
-
+                snakes.add(new Enemigos(x + snak.get(i)*10, 450));
             }
         }
     }
+    
+    JButton NextNivel;
+    public void Boton(){
+        NextNivel= new JButton("Segundo Nivel");
+            
+            setBackground(Color.BLUE);
+            setLayout(new BoxLayout(this, x));
+            NextNivel.setVisible(false);
+            NextNivel.setLocation(0, 0);
+            NextNivel.addActionListener(new PasarAlNivel2());
+            this.add(NextNivel);
+            }
 
-//        public void AgregarBananas(){
-//    for (int i = 0; i <70; i++) {
-//            if(i<40){
-//            bananas.add(new Banana(x+ban.get(i)*2, 400));
-//                
-//            }else if(i<70){
-//            bananas.add(new Banana(x+ban.get(i)*2, 250));
-//            System.out.println(bananas.get(i).getX()+" , "+ bananas.get(i).getY());
-//        }
-//}
-//}
     @Override
     protected void paintComponent(Graphics g) {
 
@@ -112,6 +126,7 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
         Image personaje = loadImage("ANA.png");
         Image salto = loadImage("jump.png");
         Image snake = loadImage("king_cobra.png");
+//        Image tronco= loadImage()
 
         for (int i = 0; i < 300; i++) {
             g.drawImage(fondo, this.fondo + (i * 669), 0, 669, 500, null);
@@ -128,48 +143,64 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
 
         for (int i = 0; i < 70; i++) {
             g.drawImage(banana, bananas.get(i).getX(), bananas.get(i).getY(), 40, 60, this);
-            if (i < snakes.size()) {
-                g.drawImage(snake, snakes.get(i).getX(), snakes.get(i).getY() + 100, snakes.get(i).getX() + 60, snakes.get(i).getY() + 150, (this.secuencia * 99), 100, (this.secuencia * 96) + 100, 195, this);
-            }
+//            if (i < snakes.size()) {
+                g.drawImage(snake, snakes.get(i).getX(), snakes.get(i).getY() + 40, snakes.get(i).getX() + 60, snakes.get(i).getY() + 100, (this.secuenciaAtras * 99), 100, (this.secuenciaAtras * 96) - 100, 195, this);
+//          }
         }
-        g.drawImage(snake, s.getX(), s.getY() + 100, s.getX() + 60, s.getY() + 150, (this.secuencia * 99), 100, (this.secuencia * 96) + 100, 195, this);
-        //g.drawImage(snake, 300, 500, 380, 550, 1, 100, 100, 195, this);        
-        //g.drawImage(snake, 300, 500, 380, 550, 98, 98, 190, 195, this);
-        //g.drawImage(snake, 300, 500, 380, 550, 198, 98, 290, 195, this);
-        //g.drawImage(banana, x + 50, 400, 40, 60, this);
         g.setColor(Color.LIGHT_GRAY);
-        g.fillRect(800, 30, 80, 40);
+        g.fillRect(810, 10, 120, 50);
         g.setColor(Color.BLACK);
+        Font MiFuente= new Font("Courrier New", 1, 20);
+        g.setFont(MiFuente);
         g.drawString("Puntaje: " + t.getContadorBananas(), 820, 40);
+        
+        g.setColor(Color.RED);
+        g.fillRect(410, 10, 120, 50);
+        g.setColor(Color.BLACK);
+        g.drawString("Vidas: " + t.getVidas(), 420, 40);
 
         if (t.getY() == 400 && direccion == true) {
             g.drawImage(personaje, t.getX(), t.getY(), t.getX() + 120, t.getY() + 170, (this.secuencia * 270), 0, (this.secuencia * 270) + 270, 520, this);
-        } else if (t.getY() < 400) {
+        }  
+        if (t.getY() < 400 && direccion==true) {
             g.drawImage(salto, t.getX(), t.getY(), t.getX() + 140, t.getY() + 190, (this.secuencia * 360), 0, (this.secuencia * 360) + 360, 860, this);
         }
-
-        if (direccion == false) {
+        if (t.getY()==400 && direccion == false) {
             g.drawImage(personaje, t.getX(), t.getY(), t.getX() + 120, t.getY() + 170, (this.secuenciaAtras * 270), 0, (this.secuenciaAtras * 270) - 270, 520, this);
+        }
+        if (t.getY() < 400 && direccion==false) {
+            g.drawImage(salto, t.getX(), t.getY(), t.getX() + 140, t.getY() + 190, (this.secuenciaAtras * 360), 0, (this.secuenciaAtras * 360) - 360, 860, this);
         }
 
         for (int i = 0; i < bananas.size(); i++) {
             if (bananas.get(i).CogerBananas(t) == true) {
-                t.setContadorBananas(t.getContadorBananas() + 1);
+                t.setContadorBananas(t.getContadorBananas() +1);
                 if (i < 40) {
                     bananas.remove(i);
                     bananas.add(new Banana(x + ban.get(i) * 2, 300));
-                } else if (i >= 40) {
+                } if (i >= 40) {
                     bananas.remove(i);
                     bananas.add(new Banana(x + ban.get(i) * 2, 450));
                 }
             }
         }
         for (int i = 0; i < snakes.size(); i++) {
-            if (snakes.get(i).tocarEnemigo(t) == true) {
+               
+            if (snakes.get(i).tocarEnemigo(t) == true ) {
+                t.setVidas(t.getVidas()-1);
+             
+            }
+            if(t.getVidas()==0){
                 this.gameIsFinished = true;
+                
             }
         }
+        if(t.getContadorBananas()>56){
+                timer.stop();
+                NextNivel.setVisible(true);
+            }
 
+            
     }
 
     public void endGame(Graphics g) {
@@ -179,7 +210,9 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
             g.drawImage(personajeCaido, t.getX(), t.getY(), t.getX() + 50, t.getY() + 170, (this.secuencia * 270), 0, (this.secuencia * 270) + 100, 520, this);
         } else {
             g.drawImage(personajeDormido, t.getX(), t.getY(), 170, 160, this);
+            
             this.timer.stop();
+            g.drawImage(gameover, 200, 0, this);
         }
 
     }
@@ -197,6 +230,7 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
         }
         for (int i = 0; i < 70; i++) {
             bananas.get(i).setX(bananas.get(i).getX() - 10);
+            snakes.get(i).setX(snakes.get(i).getX() - 10);
         }
         t.setX(t.getX() - 5);
 
@@ -219,6 +253,7 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
         public void keyReleased(KeyEvent e) {
             int key = e.getKeyCode();
             if (key == KeyEvent.VK_UP) {
+                if(direccion ==true){
                 for (int i = 0; t.getY() < 280; i++) {
                     t.setY(t.getY() + 1);
                     t.setX(t.getX() + 2);
@@ -230,15 +265,26 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
                 for (int i = 0; t.getY() < 400; i++) {
                     t.setY(t.getY() + 2);
                     t.setX(t.getX() + 1);
+                }}
+                if(direccion ==false){
+                for (int i = 0; t.getY() < 280; i++) {
+                    t.setY(t.getY() + 1);
+                    t.setX(t.getX() - 2);
                 }
+                for (int i = 0; t.getY() < 320; i++) {
+                    t.setY(t.getY() + 1);
+                    t.setX(t.getX() - 1);
+                }
+                for (int i = 0; t.getY() < 400; i++) {
+                    t.setY(t.getY() + 2);
+                    t.setX(t.getX() - 1);
+                }}
             }
         }
 
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
-            if (key == KeyEvent.VK_SPACE) {
-                System.out.println("Presiono el espacio");
-            }
+            
             if (key == KeyEvent.VK_LEFT) {
                 direccion = false;
                 t.setX(t.getX() - 5);
@@ -248,6 +294,7 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
                 t.setX(t.getX() + 5);
             }
             if (key == KeyEvent.VK_UP) {
+                if(direccion==true){
                 for (int i = 0; t.getY() > 320; i++) {
                     t.setY(t.getY() - 2);
                     t.setX(t.getX() + 1);
@@ -259,7 +306,20 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
                 for (int i = 0; t.getY() > 250; i++) {
                     t.setY(t.getY() - 1);
                     t.setX(t.getX() + 2);
+                }}
+                if(direccion==false){
+                for (int i = 0; t.getY() > 320; i++) {
+                    t.setY(t.getY() - 2);
+                    t.setX(t.getX() - 1);
                 }
+                for (int i = 0; t.getY() > 280; i++) {
+                    t.setY(t.getY() - 1);
+                    t.setX(t.getX() - 1);
+                }
+                for (int i = 0; t.getY() > 250; i++) {
+                    t.setY(t.getY() - 1);
+                    t.setX(t.getX() - 2);
+                }}
 
             }
 
@@ -268,12 +328,12 @@ public class JuegoFormas extends JPanel implements ActionListener, MouseListener
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Usted ha clickeado");
-        Point mp = e.getPoint();
-        if (getBounds().contains(mp)) {
-            this.timer.stop();
-
-        }
+//        System.out.println("Usted ha clickeado");
+//        Point mp = e.getPoint();
+//        if (getBounds().contains(mp)) {
+//            this.timer.stop();
+//
+//        }
     }
 
     @Override
