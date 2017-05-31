@@ -26,6 +26,7 @@ public class Inicio extends javax.swing.JFrame {
         setContentPane(new JLabel(new ImageIcon("forest-background.png")));
         setContentPane(new JLabel(new ImageIcon("TarzanLetrero.png")));
         initComponents();
+        setLocationRelativeTo(null);
         
     }
 
@@ -74,7 +75,7 @@ public class Inicio extends javax.swing.JFrame {
         setTitle("Tarzan Adventure");
         setFont(new java.awt.Font("Bookman Old Style", 0, 12)); // NOI18N
         setForeground(java.awt.Color.red);
-        setLocation(new java.awt.Point(500, 400));
+        setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(1000, 600));
         setName("InicioJuego"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1000, 600));
@@ -109,14 +110,14 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(195, 195, 195)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addGap(177, 177, 177)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,8 +125,8 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap(501, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 
@@ -137,7 +138,7 @@ public class Inicio extends javax.swing.JFrame {
         TestPaintComponent1 frame= new TestPaintComponent1();
         frame.setTitle("Tarzan Adventure: Nivel 1");
         frame.setSize(1000 , 600);
-        frame.setLocationRelativeTo(null); //Center the frame
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         

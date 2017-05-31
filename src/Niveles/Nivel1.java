@@ -5,7 +5,7 @@
  */
 package Niveles;
 
-import Juegoclase.Banana;
+import Juegoclase.Recompensas;
 import Juegoclase.Enemigos;
 import Juegoclase.Tarzan;
 import Menu.PasarAlNivel2;
@@ -37,7 +37,7 @@ import javax.swing.Timer;
  *
  * @author i7hpinñi
  */
-public class Nivel1 extends JPanel implements ActionListener, MouseListener {
+public class Nivel1 extends JPanel implements ActionListener{
 
     private int x;
     private int y = 400;
@@ -45,24 +45,19 @@ public class Nivel1 extends JPanel implements ActionListener, MouseListener {
     private Timer timer;
     private int secuencia;
     private int secuenciaAtras = 6;
-    private int coord;
     private int z = 250;
-    private int contador;
     private boolean direccion = true;
     private ArrayList<Integer> aleatorio = new ArrayList<>();
-    private Tarzan t = new Tarzan(z + 100, y);
-    private Enemigos s = new Enemigos(z + 50, y);
+    public Tarzan t = new Tarzan(z + 100, y);
     private ArrayList<Enemigos> snakes = new ArrayList<>();
     private ArrayList<Integer> snak = rectangulosBananas();
-    private ArrayList<Banana> bananas = new ArrayList<>();
+    private ArrayList<Recompensas> bananas = new ArrayList<>();
     private ArrayList<Integer> ban = rectangulosBananas();
     private boolean gameIsFinished = false;
-    private int toques=0;
-    
-        Image gameover= loadImage("YouLose_LI.jpg");
+    Image gameover= loadImage("YouLose_LI.jpg");
+    JButton NextNivel;
 
     public Nivel1() {
-        this.addMouseListener(this);
         addKeyListener(new TAdapter());
         setFocusable(true);
         timer = new Timer(90, this);
@@ -71,40 +66,27 @@ public class Nivel1 extends JPanel implements ActionListener, MouseListener {
         agregar();
         Boton();
     }
-//      
-//    public void coordenadasBananas(){
-//        for (int i=0; i<70; i++) {
-//            if(i<40){
-//                coord= (int) (Math.random()*15000+200);
-//                bananas.add(new Banana(x+coord*2, 400));
-//            }else if(i<70){
-//                coord= (int) (Math.random()*15000+200);
-//                bananas.add(new Banana(x+coord*2, 250));
-//            }
-//        }
-//    }
-
     public ArrayList rectangulosBananas() {
         for (int i = 0; i < 70; i++) {
-            aleatorio.add((int) (Math.random() * 10000 + 200));
+            aleatorio.add((int) (Math.random() * 8000 + 200));
         }
         return aleatorio;
     }
+    
 
     public void agregar() {
         for (int i = 0; i < 70; i++) {
             if (i < 40) {
-                bananas.add(new Banana(x + ban.get(i) * 2, 450));
+                bananas.add(new Recompensas(x + ban.get(i) * 2, 450));
                 snakes.add(new Enemigos(x + snak.get(i)*3, 450));
 
             } else if (i < 70) {
-                bananas.add(new Banana(x + ban.get(i) * 2, 300));
+                bananas.add(new Recompensas(x + ban.get(i) * 2, 300));
                 snakes.add(new Enemigos(x + snak.get(i)*10, 450));
             }
         }
     }
     
-    JButton NextNivel;
     public void Boton(){
         NextNivel= new JButton("Segundo Nivel");
             
@@ -126,7 +108,6 @@ public class Nivel1 extends JPanel implements ActionListener, MouseListener {
         Image personaje = loadImage("ANA.png");
         Image salto = loadImage("jump.png");
         Image snake = loadImage("king_cobra.png");
-//        Image tronco= loadImage()
 
         for (int i = 0; i < 300; i++) {
             g.drawImage(fondo, this.fondo + (i * 669), 0, 669, 500, null);
@@ -143,20 +124,18 @@ public class Nivel1 extends JPanel implements ActionListener, MouseListener {
 
         for (int i = 0; i < 70; i++) {
             g.drawImage(banana, bananas.get(i).getX(), bananas.get(i).getY(), 40, 60, this);
-//            if (i < snakes.size()) {
-                g.drawImage(snake, snakes.get(i).getX(), snakes.get(i).getY() + 40, snakes.get(i).getX() + 60, snakes.get(i).getY() + 100, (this.secuenciaAtras * 99), 100, (this.secuenciaAtras * 96) - 100, 195, this);
-//          }
+            g.drawImage(snake, snakes.get(i).getX(), snakes.get(i).getY() + 40, snakes.get(i).getX() + 60, snakes.get(i).getY() + 100, (this.secuenciaAtras * 99), 100, (this.secuenciaAtras * 96) - 100, 195, this);
         }
-        g.setColor(Color.LIGHT_GRAY);
-        g.fillRect(810, 10, 120, 50);
         g.setColor(Color.BLACK);
+        g.fillRect(810, 10, 120, 50);
+        g.setColor(Color.green);
         Font MiFuente= new Font("Courrier New", 1, 20);
         g.setFont(MiFuente);
-        g.drawString("Puntaje: " + t.getContadorBananas(), 820, 40);
+        g.drawString("Puntaje: " + t.getContadorRecompensas(), 820, 40);
         
-        g.setColor(Color.RED);
-        g.fillRect(410, 10, 120, 50);
         g.setColor(Color.BLACK);
+        g.fillRect(410, 10, 120, 50);
+        g.setColor(Color.green);
         g.drawString("Vidas: " + t.getVidas(), 420, 40);
 
         if (t.getY() == 400 && direccion == true) {
@@ -173,14 +152,14 @@ public class Nivel1 extends JPanel implements ActionListener, MouseListener {
         }
 
         for (int i = 0; i < bananas.size(); i++) {
-            if (bananas.get(i).CogerBananas(t) == true) {
-                t.setContadorBananas(t.getContadorBananas() +1);
+            if (bananas.get(i).CogerRecompensas(t) == true) {
+                t.setContadorRecompensas(t.getContadorRecompensas() +1);
                 if (i < 40) {
                     bananas.remove(i);
-                    bananas.add(new Banana(x + ban.get(i) * 2, 300));
+                    bananas.add(new Recompensas(x + ban.get(i) * 2, 300));
                 } if (i >= 40) {
                     bananas.remove(i);
-                    bananas.add(new Banana(x + ban.get(i) * 2, 450));
+                    bananas.add(new Recompensas(x + ban.get(i) * 2, 450));
                 }
             }
         }
@@ -195,9 +174,10 @@ public class Nivel1 extends JPanel implements ActionListener, MouseListener {
                 
             }
         }
-        if(t.getContadorBananas()>56){
+        if(t.getContadorRecompensas()==49){
                 timer.stop();
                 NextNivel.setVisible(true);
+                
             }
 
             
@@ -326,33 +306,5 @@ public class Nivel1 extends JPanel implements ActionListener, MouseListener {
         }
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-//        System.out.println("Usted ha clickeado");
-//        Point mp = e.getPoint();
-//        if (getBounds().contains(mp)) {
-//            this.timer.stop();
-//
-//        }
-    }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
 }

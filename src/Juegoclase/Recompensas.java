@@ -5,13 +5,13 @@
  */
 package Juegoclase;
 
-public class Banana extends Objetos{
+public class Recompensas extends Objetos{
 
 
 private int ancho;
 private int largo;
 
-    public Banana(int x, int y) {
+    public Recompensas(int x, int y) {
         super(x, y);
         this.ancho = 40;
         this.largo = 60;
@@ -19,7 +19,7 @@ private int largo;
 
     
     
-    public boolean CogerBananas(Tarzan t) {
+    public boolean CogerRecompensas(Tarzan t) {
         if (getX()<=t.getX()+t.getAncho()&&getX()+getAncho()>=t.getX()
                 && getY()<=t.getLargo()+t.getY()&&getY()+getLargo()>=t.getY()) {            
             return true;

@@ -10,7 +10,7 @@ public class Tarzan {
     private int x;
     private int ancho;
     private int largo;
-    private int contadorBananas=50;
+    private int contadorRecompensas=48;
     private int vidas;
 
     public Tarzan(int x, int y) {
@@ -53,12 +53,12 @@ public class Tarzan {
         this.largo = largo;
     }
 
-    public int getContadorBananas() {
-        return contadorBananas;
+    public int getContadorRecompensas() {
+        return contadorRecompensas;
     }
 
-    public void setContadorBananas(int contadorBananas) {
-        this.contadorBananas = contadorBananas;
+    public void setContadorRecompensas(int contadorBananas) {
+        this.contadorRecompensas = contadorBananas;
     }
 
     public int getVidas() {
