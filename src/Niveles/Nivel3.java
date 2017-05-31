@@ -173,6 +173,7 @@ public class Nivel3 extends JPanel implements ActionListener{
             }
         }
         if(t.getContadorRecompensas()==63){
+            
                 timer.stop();
                 g.drawImage(winner, 0, 0,1000,600, this);
                 Font Otro= new Font("Courrier New", 1, 50);
@@ -180,8 +181,8 @@ public class Nivel3 extends JPanel implements ActionListener{
                 g.setColor(Color.BLACK);
                 g.drawString("Haz Ganado!!", 100, 100);
                 g.drawString("Puntaje total: "+ 168, 400, 500);
-                //Reiniciar.setVisible(true);
                 System.out.println("Usted ha ganado!!");
+                
                
             }
 
