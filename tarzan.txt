@@ -9,3 +9,6 @@ Gina;63
 Blanca;63
 Oscar;63
 Cristian;168
+Fabio;82
+null;91
+Gilberto;110

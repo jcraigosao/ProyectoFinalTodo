@@ -158,14 +158,14 @@ public class Nivel1 extends JPanel implements ActionListener, NivelBase{
             g.drawImage(snake, snakes.get(i).getX(), snakes.get(i).getY() + 40, snakes.get(i).getX() + 60, snakes.get(i).getY() + 100, (this.secuenciaAtras * 99), 100, (this.secuenciaAtras * 96) - 100, 195, this);
         }
         g.setColor(Color.BLACK);
-        g.fillRect(810, 10, 120, 50);
+        g.fillRect(810, 10, 140, 50);
         g.setColor(Color.green);
         Font MiFuente= new Font("Courrier New", 1, 20);
         g.setFont(MiFuente);
         g.drawString("Puntaje: " + t.getContadorRecompensas(), 820, 40);
         
         g.setColor(Color.BLACK);
-        g.fillRect(410, 10, 120, 50);
+        g.fillRect(410, 10, 110, 50);
         g.setColor(Color.green);
         g.drawString("Vidas: " + t.getVidas(), 420, 40);
 

@@ -3,6 +3,7 @@ package Niveles;
 import Juegoclase.Recompensas;
 import Juegoclase.Enemigos;
 import Juegoclase.Tarzan;
+import Menu.Escuchador;
 import dao.Archivo;
 import dao.Estadistica;
 import java.applet.Applet;
@@ -121,13 +122,6 @@ public class Nivel3 extends JPanel implements ActionListener, NivelBase{
     }
     
      public void Boton(){
-        Reiniciar= new JButton("Volver a jugar");
-            
-            setBackground(Color.BLUE);
-            setLayout(new BoxLayout(this, x));
-            Reiniciar.setVisible(false);
-            Reiniciar.setLocation(0, 0);
-            this.add(Reiniciar);
             }
 
     @Override
@@ -160,14 +154,14 @@ public class Nivel3 extends JPanel implements ActionListener, NivelBase{
   
         }
         g.setColor(Color.BLACK);
-        g.fillRect(810, 10, 120, 50);
+        g.fillRect(810, 10, 140, 50);
         g.setColor(Color.ORANGE);
         Font MiFuente= new Font("Courrier New", 1, 20);
         g.setFont(MiFuente);
         g.drawString("Puntaje: " + t.getContadorRecompensas(), 820, 40);
         
         g.setColor(Color.BLACK);
-        g.fillRect(410, 10, 120, 50);
+        g.fillRect(410, 10, 110, 50);
         g.setColor(Color.ORANGE);
         g.drawString("Vidas: " + t.getVidas(), 420, 40);
 
@@ -245,7 +239,6 @@ public class Nivel3 extends JPanel implements ActionListener, NivelBase{
                     }
                 }
                 
-               
             }
 
             

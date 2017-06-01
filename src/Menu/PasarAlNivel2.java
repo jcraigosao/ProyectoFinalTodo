@@ -26,7 +26,7 @@ public class PasarAlNivel2 implements ActionListener, MouseListener{
         frame.setTitle("Tarzan Adventure: Nivel 2");
         frame.setSize(1000, 600);
         frame.setLocationRelativeTo(null); //Center the frame
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         open=true;
         }

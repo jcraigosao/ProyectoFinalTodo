@@ -86,6 +86,7 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase {
 
         this.contador = puntaje;
         t.setContadorRecompensas(this.contador);
+        
         try {
             sonido = new URL("file:tarzan2.wav");
             son = Applet.newAudioClip(sonido);
@@ -167,14 +168,14 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase {
                     128, this);
         }
         g.setColor(Color.BLACK);
-        g.fillRect(810, 10, 120, 50);
+        g.fillRect(810, 10, 140, 50);
         g.setColor(Color.WHITE);
         Font MiFuente = new Font("Courrier New", 1, 20);
         g.setFont(MiFuente);
         g.drawString("Puntaje: " + t.getContadorRecompensas(), 820, 40);
 
         g.setColor(Color.BLACK);
-        g.fillRect(410, 10, 120, 50);
+        g.fillRect(410, 10, 110, 50);
         g.setColor(Color.WHITE);
         g.drawString("Vidas: " + t.getVidas(), 420, 40);
 
