@@ -3,7 +3,6 @@ package Niveles;
 import Juegoclase.Recompensas;
 import Juegoclase.Enemigos;
 import Juegoclase.Tarzan;
-import Menu.Escuchador;
 import dao.Archivo;
 import dao.Estadistica;
 import java.applet.Applet;
