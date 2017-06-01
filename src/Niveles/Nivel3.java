@@ -3,8 +3,6 @@ package Niveles;
 import Juegoclase.Recompensas;
 import Juegoclase.Enemigos;
 import Juegoclase.Tarzan;
-import Menu.PasarAlNivel3;
-import Menu.VolverAlComienzo;
 import dao.Archivo;
 import dao.Estadistica;
 import java.applet.Applet;
@@ -30,10 +28,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-/**
- *
- * @author i7hpinñi
- */
+
 public class Nivel3 extends JPanel implements ActionListener, NivelBase{
 
     private int x;
@@ -70,6 +65,7 @@ public class Nivel3 extends JPanel implements ActionListener, NivelBase{
     JButton Reiniciar;
     
     
+    
     public Nivel3(int puntaje) {
         addKeyListener(new TAdapter());
         setFocusable(true);
@@ -79,7 +75,7 @@ public class Nivel3 extends JPanel implements ActionListener, NivelBase{
         agregar();
         this.contador=puntaje;
         t.setContadorRecompensas(this.contador);
-    
+        
         try {
             sonido = new URL("file:tarzan3.wav");
             son = Applet.newAudioClip(sonido);
@@ -161,10 +157,7 @@ public class Nivel3 extends JPanel implements ActionListener, NivelBase{
             g.drawImage(araña, arañas.get(i).getX(), arañas.get(i).getY(), arañas.get(i).getX() 
                         + 40, arañas.get(i).getY() + 60, (this.secuencia2 * 32), 0, (this.secuencia2 * 32) + 32, 
                         32,this);
-            
-//            g.drawImage(helicoptero, helicopteros.get(i).getX(), helicopteros.get(i).getY(), helicopteros.get(i).getX() 
-//                        + 50, helicopteros.get(i).getY() + 80, (this.secuencia2 * 125), 0, (this.secuencia2 * 125) + 125, 
-//                        128, this);
+  
         }
         g.setColor(Color.BLACK);
         g.fillRect(810, 10, 120, 50);
@@ -227,7 +220,7 @@ public class Nivel3 extends JPanel implements ActionListener, NivelBase{
                 son.stop();
             }
         }
-        if(t.getContadorRecompensas()==63){
+        if(t.getContadorRecompensas()>=168){
             
                 timer.stop();
                 g.drawImage(winner, 0, 0,1000,600, this);
@@ -237,6 +230,20 @@ public class Nivel3 extends JPanel implements ActionListener, NivelBase{
                 g.drawString("Haz Ganado!!", 100, 100);
                 g.drawString("Puntaje total: "+ 168, 400, 500);
                 System.out.println("Usted ha ganado!!");
+                
+                if (this.puntajeSalvado != true) {
+                    Archivo archivo = new Archivo();
+                    String nombreJugador = JOptionPane.showInputDialog("Ingrese nombre del jugador");
+                    Estadistica estadistica = new Estadistica();
+                    estadistica.setJugador(nombreJugador);
+                    estadistica.setPuntje(t.getContadorRecompensas());
+                    try {
+                        archivo.escribir(estadistica);
+                        this.puntajeSalvado = true;
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(Nivel1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 
                
             }

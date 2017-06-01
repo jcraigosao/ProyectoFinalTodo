@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Menu;
 
 import Niveles.TestPaintComponent2;
@@ -13,10 +8,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
-/**
- *
- * @author TOSHIBA
- */
 public class PasarAlNivel2 implements ActionListener, MouseListener{
 
     private int puntaje;

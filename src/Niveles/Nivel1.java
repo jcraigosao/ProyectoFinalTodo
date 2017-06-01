@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Niveles;
 
 
@@ -222,7 +217,7 @@ public class Nivel1 extends JPanel implements ActionListener, NivelBase{
                 }
             }
         }
-        if(t.getContadorRecompensas()==49){
+        if(t.getContadorRecompensas()>=49){
                 timer.stop();
                 son.stop();
                 NextNivel.addActionListener(new ActionListener() {

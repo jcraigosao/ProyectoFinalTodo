@@ -1,16 +1,11 @@
-
 package Juegoclase;
 
-/**
- *
- * @author TOSHIBA
- */
 public class Tarzan {
     private int y;
     private int x;
     private int ancho;
     private int largo;
-    private int contadorRecompensas=45;
+    private int contadorRecompensas;
     private int vidas;
 
     public Tarzan(int x, int y) {

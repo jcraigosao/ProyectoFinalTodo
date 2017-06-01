@@ -3,20 +3,15 @@ package Niveles;
 import Juegoclase.Recompensas;
 import Juegoclase.Enemigos;
 import Juegoclase.Tarzan;
-import Menu.PasarAlNivel2;
 import Menu.PasarAlNivel3;
 import dao.Archivo;
 import dao.Estadistica;
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -74,13 +69,13 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase {
     
     private static Nivel2 theOnlyInstance = null;
     
-    public static Nivel2 getInstance( int puntaje ) {
-        if ( theOnlyInstance == null )
-            theOnlyInstance = new Nivel2( puntaje );
-        return theOnlyInstance;
-    }
+//    public static Nivel2 getInstance( int puntaje ) {
+//        if ( theOnlyInstance == null )
+//            theOnlyInstance = new Nivel2( puntaje );
+//        return theOnlyInstance;
+//    }
 
-    private Nivel2(int puntaje) {
+    public Nivel2(int puntaje) {
         addKeyListener(new TAdapter());
         setFocusable(true);
         timer = new Timer(90, this);
@@ -233,11 +228,10 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase {
                 son.stop();
             }
         }
-        if (t.getContadorRecompensas() == 56) {
+        if (t.getContadorRecompensas() >= 105) {
             timer.stop();
             NextNivel.addActionListener(new PasarAlNivel3(t.getContadorRecompensas()));
             NextNivel.setVisible(true);
-            //PasarAlNivel2.hideFrame();
             son.stop();
         }
 
