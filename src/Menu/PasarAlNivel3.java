@@ -19,6 +19,8 @@ import javax.swing.JFrame;
 public class PasarAlNivel3 implements ActionListener {
 
     private int puntaje;
+    private static boolean open;
+    private static TestPaintComponent3 frame;
 
     public PasarAlNivel3(int puntaje) {
         this.puntaje = puntaje;
@@ -26,13 +28,18 @@ public class PasarAlNivel3 implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(!open){
         System.out.println("Tercer Nivel");
-        TestPaintComponent3 frame = new TestPaintComponent3(this.puntaje);
+        frame = new TestPaintComponent3(this.puntaje);
         frame.setTitle("Tarzan Adventure: Nivel 3");
         frame.setSize(1000, 600);
         frame.setLocationRelativeTo(null); //Center the frame
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
+        PasarAlNivel2.hideFrame();
+        open=true;
     }
+    }
+    
 
 }

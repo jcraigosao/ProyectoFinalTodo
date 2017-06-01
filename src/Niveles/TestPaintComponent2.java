@@ -13,9 +13,14 @@ import Niveles.Nivel1;
  * @author TOSHIBA
  */
 public class TestPaintComponent2 extends JFrame{
+    
+    private static boolean open = false;
 
     public TestPaintComponent2(int puntaje) {
-        add(new Nivel2(puntaje));
+        if ( !open ) {
+            add(Nivel2.getInstance(puntaje));
+            open = true;
+        }
     }
 
     }

@@ -3,6 +3,7 @@ package Niveles;
 import Juegoclase.Recompensas;
 import Juegoclase.Enemigos;
 import Juegoclase.Tarzan;
+import Menu.PasarAlNivel3;
 import Menu.VolverAlComienzo;
 import dao.Archivo;
 import dao.Estadistica;

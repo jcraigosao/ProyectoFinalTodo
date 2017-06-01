@@ -9,6 +9,7 @@ package Niveles;
 import Juegoclase.Recompensas;
 import Juegoclase.Enemigos;
 import Juegoclase.Tarzan;
+import Menu.Inicio;
 import Menu.PasarAlNivel2;
 import dao.Archivo;
 import dao.Estadistica;
@@ -32,6 +33,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import Niveles.TestPaintComponent1;
 import java.awt.Component;
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -132,6 +134,7 @@ public class Nivel1 extends JPanel implements ActionListener, NivelBase{
             NextNivel.setVisible(false);
             NextNivel.setLocation(0, 0);
             this.add(NextNivel);
+            
             }
     
     
@@ -225,15 +228,15 @@ public class Nivel1 extends JPanel implements ActionListener, NivelBase{
                 NextNivel.addActionListener(new ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     pasarNivel(evt);
-
+                    Inicio.hideFrame();
                 }
             });
             NextNivel.setVisible(true);
         }
-            }
+    }
 
-       public void pasarNivel(ActionEvent e) {
-        new PasarAlNivel2(t.getContadorRecompensas()).actionPerformed(e);
+       public void pasarNivel(ActionEvent me) {
+        new PasarAlNivel2(t.getContadorRecompensas()).actionPerformed(me);
         this.setVisible(false);
         
     }      

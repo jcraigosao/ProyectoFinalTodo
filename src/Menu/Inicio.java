@@ -144,10 +144,12 @@ public class Inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private static TestPaintComponent1 frame;
+    
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         
         System.out.println("Primer Nivel");
-        TestPaintComponent1 frame= new TestPaintComponent1();
+        frame= new TestPaintComponent1();
         frame.setTitle("Tarzan Adventure: Nivel 1");
         frame.setSize(1000 , 600);
         frame.setLocationRelativeTo(null);
@@ -182,6 +184,9 @@ public class Inicio extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
     
+    public static void hideFrame( ) {
+        frame.setVisible(false);
+    }
     
     /**
      * @param args the command line arguments

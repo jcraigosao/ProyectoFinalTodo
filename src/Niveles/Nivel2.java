@@ -38,7 +38,7 @@ import javax.swing.Timer;
  *
  * @author i7hpinñi
  */
-public class Nivel2 extends JPanel implements ActionListener, NivelBase{
+public class Nivel2 extends JPanel implements ActionListener, NivelBase {
 
     private int x;
     private int y = 400;
@@ -72,7 +72,15 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase{
     JButton NextNivel;
     private boolean puntajeSalvado;
     
-    public Nivel2(int puntaje) {
+    private static Nivel2 theOnlyInstance = null;
+    
+    public static Nivel2 getInstance( int puntaje ) {
+        if ( theOnlyInstance == null )
+            theOnlyInstance = new Nivel2( puntaje );
+        return theOnlyInstance;
+    }
+
+    private Nivel2(int puntaje) {
         addKeyListener(new TAdapter());
         setFocusable(true);
         timer = new Timer(90, this);
@@ -80,8 +88,8 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase{
         rectangulosRecompensas();
         agregar();
         Boton();
-        
-        this.contador=puntaje;
+
+        this.contador = puntaje;
         t.setContadorRecompensas(this.contador);
         try {
             sonido = new URL("file:tarzan2.wav");
@@ -103,7 +111,7 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase{
         personaje = loadImage("ANA.png");
         salto = loadImage("jump.png");
         insecto = loadImage("insecto.png");
-        gameover= loadImage("YouLose_LI.jpg");
+        gameover = loadImage("YouLose_LI.jpg");
         son.loop();
     }
 
@@ -113,36 +121,36 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase{
         }
         return aleatorio;
     }
-    
 
     public void agregar() {
         for (int i = 0; i < 70; i++) {
             if (i < 40) {
                 Cerezas.add(new Recompensas(x + cer.get(i) * 2, 450));
-                insectos.add(new Enemigos(x + insect.get(i)*3, 450));
+                insectos.add(new Enemigos(x + insect.get(i) * 3, 450));
 
             } else if (i < 70) {
                 Cerezas.add(new Recompensas(x + cer.get(i) * 2, 300));
-                insectos.add(new Enemigos(x + insect.get(i)*3, 280));
+                insectos.add(new Enemigos(x + insect.get(i) * 3, 280));
             }
         }
     }
-    
-    public void Boton(){
-        NextNivel= new JButton("Tercer Nivel");
-            
-            setBackground(Color.BLUE);
-            setLayout(new BoxLayout(this, x));
-            NextNivel.setVisible(false);
-            NextNivel.setLocation(0, 0);
-            this.add(NextNivel);
-            }
+
+    public void Boton() {
+
+        NextNivel = new JButton("Tercer Nivel");
+
+        setBackground(Color.BLUE);
+        setLayout(new BoxLayout(this, x));
+        NextNivel.setVisible(false);
+        NextNivel.setLocation(0, 0);
+        this.add(NextNivel);
+
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        
 
         for (int i = 0; i < 300; i++) {
             g.drawImage(fondoo, this.fondo + (i * 669), 0, 669, 600, null);
@@ -159,17 +167,17 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase{
 
         for (int i = 0; i < 70; i++) {
             g.drawImage(banana, Cerezas.get(i).getX(), Cerezas.get(i).getY(), 40, 60, this);
-                g.drawImage(insecto, insectos.get(i).getX(), insectos.get(i).getY(), insectos.get(i).getX() 
-                        + 50, insectos.get(i).getY() + 80, (this.secuencia2 * 125), 0, (this.secuencia2 * 125) + 125, 
-                        128, this);
+            g.drawImage(insecto, insectos.get(i).getX(), insectos.get(i).getY(), insectos.get(i).getX()
+                    + 50, insectos.get(i).getY() + 80, (this.secuencia2 * 125), 0, (this.secuencia2 * 125) + 125,
+                    128, this);
         }
         g.setColor(Color.BLACK);
         g.fillRect(810, 10, 120, 50);
         g.setColor(Color.WHITE);
-        Font MiFuente= new Font("Courrier New", 1, 20);
+        Font MiFuente = new Font("Courrier New", 1, 20);
         g.setFont(MiFuente);
         g.drawString("Puntaje: " + t.getContadorRecompensas(), 820, 40);
-        
+
         g.setColor(Color.BLACK);
         g.fillRect(410, 10, 120, 50);
         g.setColor(Color.WHITE);
@@ -177,36 +185,37 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase{
 
         if (t.getY() == 400 && direccion == true) {
             g.drawImage(personaje, t.getX(), t.getY(), t.getX() + 120, t.getY() + 170, (this.secuencia * 270), 0, (this.secuencia * 270) + 270, 520, this);
-        }  
-        if (t.getY() < 400 && direccion==true) {
+        }
+        if (t.getY() < 400 && direccion == true) {
             g.drawImage(salto, t.getX(), t.getY(), t.getX() + 140, t.getY() + 190, (this.secuencia * 360), 0, (this.secuencia * 360) + 360, 860, this);
         }
-        if (t.getY()==400 && direccion == false) {
+        if (t.getY() == 400 && direccion == false) {
             g.drawImage(personaje, t.getX(), t.getY(), t.getX() + 120, t.getY() + 170, (this.secuenciaAtras * 270), 0, (this.secuenciaAtras * 270) - 270, 520, this);
         }
-        if (t.getY() < 400 && direccion==false) {
+        if (t.getY() < 400 && direccion == false) {
             g.drawImage(salto, t.getX(), t.getY(), t.getX() + 140, t.getY() + 190, (this.secuenciaAtras * 360), 0, (this.secuenciaAtras * 360) - 360, 860, this);
         }
 
         for (int i = 0; i < Cerezas.size(); i++) {
             if (Cerezas.get(i).CogerRecompensas(t) == true) {
-                t.setContadorRecompensas(t.getContadorRecompensas() +1);
+                t.setContadorRecompensas(t.getContadorRecompensas() + 1);
                 if (i < 40) {
                     Cerezas.remove(i);
                     Cerezas.add(new Recompensas(x + cer.get(i) * 2, 300));
-                } if (i >= 40) {
+                }
+                if (i >= 40) {
                     Cerezas.remove(i);
                     Cerezas.add(new Recompensas(x + cer.get(i) * 2, 450));
                 }
             }
         }
         for (int i = 0; i < insectos.size(); i++) {
-               
-            if (insectos.get(i).tocarEnemigo(t) == true ) {
-                t.setVidas(t.getVidas()-1);
+
+            if (insectos.get(i).tocarEnemigo(t) == true) {
+                t.setVidas(t.getVidas() - 1);
                 oh.play();
             }
-            if(t.getVidas()==0){
+            if (t.getVidas() == 0) {
                 this.gameIsFinished = true;
                 if (this.puntajeSalvado != true) {
                     Archivo archivo = new Archivo();
@@ -224,14 +233,14 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase{
                 son.stop();
             }
         }
-        if(t.getContadorRecompensas()==56){
-                timer.stop();
-                NextNivel.addActionListener(new PasarAlNivel3(t.getContadorRecompensas()));
-                NextNivel.setVisible(true);
-                son.stop();
-            }
+        if (t.getContadorRecompensas() == 56) {
+            timer.stop();
+            NextNivel.addActionListener(new PasarAlNivel3(t.getContadorRecompensas()));
+            NextNivel.setVisible(true);
+            //PasarAlNivel2.hideFrame();
+            son.stop();
+        }
 
-            
     }
 
     public void endGame(Graphics g) {
@@ -241,7 +250,7 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase{
             g.drawImage(personajeCaido, t.getX(), t.getY(), t.getX() + 50, t.getY() + 170, (this.secuencia * 270), 0, (this.secuencia * 270) + 100, 520, this);
         } else {
             g.drawImage(personajeDormido, t.getX(), t.getY(), 170, 160, this);
-            
+
             this.timer.stop();
             g.drawImage(gameover, 200, 0, this);
         }
@@ -276,10 +285,10 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase{
         } else {
             this.secuencia++;
         }
-        
-        if(this.secuencia2==2){
-            this.secuencia2=0;
-        }else{
+
+        if (this.secuencia2 == 2) {
+            this.secuencia2 = 0;
+        } else {
             this.secuencia2++;
         }
         repaint();
@@ -290,38 +299,40 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase{
         public void keyReleased(KeyEvent e) {
             int key = e.getKeyCode();
             if (key == KeyEvent.VK_UP) {
-                if(direccion ==true){
-                for (int i = 0; t.getY() < 280; i++) {
-                    t.setY(t.getY() + 1);
-                    t.setX(t.getX() + 2);
+                if (direccion == true) {
+                    for (int i = 0; t.getY() < 280; i++) {
+                        t.setY(t.getY() + 1);
+                        t.setX(t.getX() + 2);
+                    }
+                    for (int i = 0; t.getY() < 320; i++) {
+                        t.setY(t.getY() + 1);
+                        t.setX(t.getX() + 1);
+                    }
+                    for (int i = 0; t.getY() < 400; i++) {
+                        t.setY(t.getY() + 2);
+                        t.setX(t.getX() + 1);
+                    }
                 }
-                for (int i = 0; t.getY() < 320; i++) {
-                    t.setY(t.getY() + 1);
-                    t.setX(t.getX() + 1);
+                if (direccion == false) {
+                    for (int i = 0; t.getY() < 280; i++) {
+                        t.setY(t.getY() + 1);
+                        t.setX(t.getX() - 2);
+                    }
+                    for (int i = 0; t.getY() < 320; i++) {
+                        t.setY(t.getY() + 1);
+                        t.setX(t.getX() - 1);
+                    }
+                    for (int i = 0; t.getY() < 400; i++) {
+                        t.setY(t.getY() + 2);
+                        t.setX(t.getX() - 1);
+                    }
                 }
-                for (int i = 0; t.getY() < 400; i++) {
-                    t.setY(t.getY() + 2);
-                    t.setX(t.getX() + 1);
-                }}
-                if(direccion ==false){
-                for (int i = 0; t.getY() < 280; i++) {
-                    t.setY(t.getY() + 1);
-                    t.setX(t.getX() - 2);
-                }
-                for (int i = 0; t.getY() < 320; i++) {
-                    t.setY(t.getY() + 1);
-                    t.setX(t.getX() - 1);
-                }
-                for (int i = 0; t.getY() < 400; i++) {
-                    t.setY(t.getY() + 2);
-                    t.setX(t.getX() - 1);
-                }}
             }
         }
 
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
-            
+
             if (key == KeyEvent.VK_LEFT) {
                 direccion = false;
                 t.setX(t.getX() - 5);
@@ -331,32 +342,34 @@ public class Nivel2 extends JPanel implements ActionListener, NivelBase{
                 t.setX(t.getX() + 5);
             }
             if (key == KeyEvent.VK_UP) {
-                if(direccion==true){
-                for (int i = 0; t.getY() > 320; i++) {
-                    t.setY(t.getY() - 2);
-                    t.setX(t.getX() + 1);
+                if (direccion == true) {
+                    for (int i = 0; t.getY() > 320; i++) {
+                        t.setY(t.getY() - 2);
+                        t.setX(t.getX() + 1);
+                    }
+                    for (int i = 0; t.getY() > 280; i++) {
+                        t.setY(t.getY() - 1);
+                        t.setX(t.getX() + 1);
+                    }
+                    for (int i = 0; t.getY() > 250; i++) {
+                        t.setY(t.getY() - 1);
+                        t.setX(t.getX() + 2);
+                    }
                 }
-                for (int i = 0; t.getY() > 280; i++) {
-                    t.setY(t.getY() - 1);
-                    t.setX(t.getX() + 1);
+                if (direccion == false) {
+                    for (int i = 0; t.getY() > 320; i++) {
+                        t.setY(t.getY() - 2);
+                        t.setX(t.getX() - 1);
+                    }
+                    for (int i = 0; t.getY() > 280; i++) {
+                        t.setY(t.getY() - 1);
+                        t.setX(t.getX() - 1);
+                    }
+                    for (int i = 0; t.getY() > 250; i++) {
+                        t.setY(t.getY() - 1);
+                        t.setX(t.getX() - 2);
+                    }
                 }
-                for (int i = 0; t.getY() > 250; i++) {
-                    t.setY(t.getY() - 1);
-                    t.setX(t.getX() + 2);
-                }}
-                if(direccion==false){
-                for (int i = 0; t.getY() > 320; i++) {
-                    t.setY(t.getY() - 2);
-                    t.setX(t.getX() - 1);
-                }
-                for (int i = 0; t.getY() > 280; i++) {
-                    t.setY(t.getY() - 1);
-                    t.setX(t.getX() - 1);
-                }
-                for (int i = 0; t.getY() > 250; i++) {
-                    t.setY(t.getY() - 1);
-                    t.setX(t.getX() - 2);
-                }}
 
             }
 
