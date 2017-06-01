@@ -5,6 +5,10 @@ import Juegoclase.Enemigos;
 import Juegoclase.Tarzan;
 import Menu.PasarAlNivel2;
 import Menu.PasarAlNivel3;
+import dao.Archivo;
+import dao.Estadistica;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -17,15 +21,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -33,7 +38,7 @@ import javax.swing.Timer;
  *
  * @author i7hpinñi
  */
-public class Nivel2 extends JPanel implements ActionListener{
+public class Nivel2 extends JPanel implements ActionListener, NivelBase{
 
     private int x;
     private int y = 400;
@@ -48,24 +53,61 @@ public class Nivel2 extends JPanel implements ActionListener{
     public Tarzan t = new Tarzan(z + 100, y);
     private Enemigos s = new Enemigos(z + 50, y);
     private ArrayList<Enemigos> insectos = new ArrayList<>();
-    private ArrayList<Integer> insect = rectangulosBananas();
+    private ArrayList<Integer> insect = rectangulosRecompensas();
     private ArrayList<Recompensas> Cerezas = new ArrayList<>();
-    private ArrayList<Integer> cer = rectangulosBananas();
+    private ArrayList<Integer> cer = rectangulosRecompensas();
+    private int contador;
     private boolean gameIsFinished = false;
-    Image gameover= loadImage("YouLose_LI.jpg");
+    protected URL sonido = null;
+    protected AudioClip son;
+    protected URL golpe = null;
+    protected AudioClip oh;
+    private Image fondoo;
+    private Image piso;
+    private Image banana;
+    private Image personaje;
+    private Image salto;
+    private Image insecto;
+    private Image gameover;
     JButton NextNivel;
+    private boolean puntajeSalvado;
     
-    public Nivel2() {
+    public Nivel2(int puntaje) {
         addKeyListener(new TAdapter());
         setFocusable(true);
         timer = new Timer(90, this);
         timer.start();
-        rectangulosBananas();
+        rectangulosRecompensas();
         agregar();
         Boton();
+        
+        this.contador=puntaje;
+        t.setContadorRecompensas(this.contador);
+        try {
+            sonido = new URL("file:tarzan2.wav");
+            son = Applet.newAudioClip(sonido);
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Nivel1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            golpe = new URL("file:ohTarzan.wav");
+            oh = Applet.newAudioClip(golpe);
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Nivel1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        fondoo = loadImage("fondo2.jpeg");
+        piso = loadImage("pisocafe.png");
+        banana = loadImage("cherry.png");
+        personaje = loadImage("ANA.png");
+        salto = loadImage("jump.png");
+        insecto = loadImage("insecto.png");
+        gameover= loadImage("YouLose_LI.jpg");
+        son.loop();
     }
 
-    public ArrayList rectangulosBananas() {
+    public ArrayList rectangulosRecompensas() {
         for (int i = 0; i < 70; i++) {
             aleatorio.add((int) (Math.random() * 8000 + 200));
         }
@@ -93,7 +135,6 @@ public class Nivel2 extends JPanel implements ActionListener{
             setLayout(new BoxLayout(this, x));
             NextNivel.setVisible(false);
             NextNivel.setLocation(0, 0);
-            NextNivel.addActionListener(new PasarAlNivel3());
             this.add(NextNivel);
             }
 
@@ -101,15 +142,10 @@ public class Nivel2 extends JPanel implements ActionListener{
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        Image fondo = loadImage("fondo2.jpeg");
-        Image piso = loadImage("pisocafe.png");
-        Image banana = loadImage("cherry.png");
-        Image personaje = loadImage("ANA.png");
-        Image salto = loadImage("jump.png");
-        Image insecto = loadImage("insecto.png");
+        
 
         for (int i = 0; i < 300; i++) {
-            g.drawImage(fondo, this.fondo + (i * 669), 0, 669, 600, null);
+            g.drawImage(fondoo, this.fondo + (i * 669), 0, 669, 600, null);
             for (int j = 0; j < 100; j++) {
                 g.drawImage(piso, this.fondo + (i * 300), 500, 300, 700, this);
             }
@@ -168,16 +204,31 @@ public class Nivel2 extends JPanel implements ActionListener{
                
             if (insectos.get(i).tocarEnemigo(t) == true ) {
                 t.setVidas(t.getVidas()-1);
-             
+                oh.play();
             }
             if(t.getVidas()==0){
                 this.gameIsFinished = true;
-                
+                if (this.puntajeSalvado != true) {
+                    Archivo archivo = new Archivo();
+                    String nombreJugador = JOptionPane.showInputDialog("Ingrese nombre del jugador");
+                    Estadistica estadistica = new Estadistica();
+                    estadistica.setJugador(nombreJugador);
+                    estadistica.setPuntje(t.getContadorRecompensas());
+                    try {
+                        archivo.escribir(estadistica);
+                        this.puntajeSalvado = true;
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(Nivel1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                son.stop();
             }
         }
         if(t.getContadorRecompensas()==56){
                 timer.stop();
+                NextNivel.addActionListener(new PasarAlNivel3(t.getContadorRecompensas()));
                 NextNivel.setVisible(true);
+                son.stop();
             }
 
             
@@ -194,7 +245,7 @@ public class Nivel2 extends JPanel implements ActionListener{
             this.timer.stop();
             g.drawImage(gameover, 200, 0, this);
         }
-
+        son.stop();
     }
 
     public Image loadImage(String imageName) {

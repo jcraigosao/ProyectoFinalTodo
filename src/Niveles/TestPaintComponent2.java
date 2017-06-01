@@ -6,6 +6,7 @@
 package Niveles;
 
 import javax.swing.JFrame;
+import Niveles.Nivel1;
 
 /**
  *
@@ -13,8 +14,8 @@ import javax.swing.JFrame;
  */
 public class TestPaintComponent2 extends JFrame{
 
-    public TestPaintComponent2() {
-        add(new Nivel2());
+    public TestPaintComponent2(int puntaje) {
+        add(new Nivel2(puntaje));
     }
 
     }

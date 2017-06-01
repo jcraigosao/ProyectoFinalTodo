@@ -13,8 +13,8 @@ import javax.swing.JFrame;
  */
 public class TestPaintComponent3 extends JFrame{
 
-    public TestPaintComponent3() {
-        add(new Nivel3());
+    public TestPaintComponent3(int puntaje) {
+        add(new Nivel3(puntaje));
     }
 
     }

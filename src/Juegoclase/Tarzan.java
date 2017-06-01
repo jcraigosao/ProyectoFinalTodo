@@ -10,7 +10,7 @@ public class Tarzan {
     private int x;
     private int ancho;
     private int largo;
-    private int contadorRecompensas=48;
+    private int contadorRecompensas=45;
     private int vidas;
 
     public Tarzan(int x, int y) {

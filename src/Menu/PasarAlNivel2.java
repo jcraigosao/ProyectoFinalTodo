@@ -17,19 +17,22 @@ import javax.swing.JFrame;
  */
 public class PasarAlNivel2 implements ActionListener{
 
-    public PasarAlNivel2() {
-    }
+    private int puntaje;
 
+    public PasarAlNivel2(int puntaje) {
+        this.puntaje = puntaje;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Segundo Nivel");
-        TestPaintComponent2 frame= new TestPaintComponent2();
+        TestPaintComponent2 frame = new TestPaintComponent2(this.puntaje);
         frame.setTitle("Tarzan Adventure: Nivel 2");
-        frame.setSize(1000 , 600);
+        frame.setSize(1000, 600);
         frame.setLocationRelativeTo(null); //Center the frame
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
+        
     }
     
 }
